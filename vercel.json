@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/beelice/(.*)",
+      "destination": "https://beelice.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/godgroup/(.*)",
+      "destination": "https://godgroup.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/dillypod/(.*)",
+      "destination": "https://dillypod.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/godmerch88/(.*)",
+      "destination": "https://godmerch88.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/gghanzo/(.*)",
+      "destination": "https://gghanzo.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/coolspod/(.*)",
+      "destination": "https://coolspod.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/dandygift/(.*)",
+      "destination": "https://dandygift.myshopify.com/admin/$1"
+    }
+  ]
+}

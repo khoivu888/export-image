@@ -11,9 +11,10 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAllProducts([]);
-    let nextPageUrl = `/${storeName}/products.json?created_at_min=${startDate}&created_at_max=${endDate}`;
+    let nextPageUrl = `/${storeName}/products.json?created_at_min=${startDate}&created_at_max=${endDate}&limit=250`;
     let pageUrl = ''
     let keepFetching = true;
+    let productsFetched = []
 
     while (keepFetching) {
         const response = await fetch(nextPageUrl, {
@@ -29,7 +30,8 @@ function App() {
             break;
         }
 
-        const data = await response.json();
+      const data = await response.json();
+      productsFetched = productsFetched.concat(data.products);
       console.log(data); // Log dữ liệu của trang hiện tại
 
 
@@ -52,11 +54,11 @@ function App() {
             keepFetching = false; // Dừng lặp nếu không có header Link
           }
       
-      setAllProducts(currentProducts => [...currentProducts, ...data.products]);
-      
-      
     }
-    const csvData = convertToCSV(allProducts);
+    setAllProducts(productsFetched);
+    await new Promise(resolve => setTimeout(resolve, 0));
+    console.log(allProducts, 'allProducts')
+    const csvData = convertToCSV(productsFetched);
       downloadCSV(csvData);
   };
   

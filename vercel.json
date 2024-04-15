@@ -27,6 +27,38 @@
     {
       "source": "/dandygift/(.*)",
       "destination": "https://dandygift.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/657af8-3/(.*)",
+      "destination": "https://657af8-3.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/tee-shirt-for-family/(.*)",
+      "destination": "https://tee-shirt-for-family.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/goodlygift88/(.*)",
+      "destination": "https://goodlygift88.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/c04f72-3/(.*)",
+      "destination": "https://c04f72-3.myshopify.com/admin/$1"
+    },
+    {
+      "source": "/amazingtees/(.*)",
+      "destination": "https://amazingtees.onshopbase.com/admin/$1"
+    },
+    {
+      "source": "/pofily/(.*)",
+      "destination": "https://pofily.onshopbase.com/admin/$1"
+    },
+    {
+      "source": "/pamaheart/(.*)",
+      "destination": "https://pamaheart.onshopbase.com/admin/$1"
+    },
+    {
+      "source": "/seegovi/(.*)",
+      "destination": "https://seegovi.onshopbase.com/admin/$1"
     }
   ]
 }

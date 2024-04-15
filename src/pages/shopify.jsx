@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function App() {
+const ShopifyPage = () => {
   const [storeName, setStoreName] = useState('');
   const [apiToken, setApiToken] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -11,68 +11,48 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAllProducts([]);
-    let page = 1;
-    const storesUsingBasicAuth = ['amazingtees', 'seegovi', 'pamaheart', 'pofily'];
-    const usesPagePagination = storesUsingBasicAuth.includes(storeName);
-
-   let formattedStartDate = startDate;
-    let formattedEndDate = endDate;
-    if (storesUsingBasicAuth.includes(storeName)) {
-        // Assuming startDate and endDate are in the format "YYYY-MM-DD"
-        formattedStartDate = new Date(startDate).toISOString();
-        formattedEndDate = new Date(endDate).toISOString();
-    }
-
+    let nextPageUrl = `/${storeName}/products.json?created_at_min=${startDate}&created_at_max=${endDate}&limit=250`;
     let pageUrl = ''
     let keepFetching = true;
     let productsFetched = []
 
+    while (keepFetching) {
+        const response = await fetch(nextPageUrl, {
+            method: 'GET',
+            headers: {
+                'X-Shopify-Access-Token': `${apiToken}`,
+            },
+        });
 
-    while (keepFetching && (!usesPagePagination || page <= 40)) {
-      let nextPageUrl = usesPagePagination ?
-            `/${storeName}/products.json?page=${page}&limit=250&created_at_min=${formattedStartDate}&created_at_max=${formattedEndDate}` :
-        `/${storeName}/products.json?created_at_min=${formattedStartDate}&created_at_max=${formattedEndDate}&limit=250`;
-      
-      const headers = storesUsingBasicAuth.includes(storeName) ? 
-            {'Authorization': `Basic ${apiToken}`} : 
-            {'X-Shopify-Access-Token': `${apiToken}`};
-      
-      const response = await fetch(nextPageUrl, {
-          method: 'GET',
-          headers: headers,
-      });
-
-      if (!response.ok) {
-          keepFetching = false; // Dừng lặp nếu gặp lỗi
-          console.error("Failed to fetch", response.statusText);
-          break;
-      }
+        if (!response.ok) {
+            keepFetching = false; // Dừng lặp nếu gặp lỗi
+            console.error("Failed to fetch", response.statusText);
+            break;
+        }
 
       const data = await response.json();
       productsFetched = productsFetched.concat(data.products);
       console.log(data); // Log dữ liệu của trang hiện tại
 
-      if (usesPagePagination) {
-        // Increment page for next loop iteration if using page-based pagination
-        page++;
-      } else {
-        const linkHeader = response.headers.get('Link');
-        // Xử lý linkHeader ở đây
+
+      const linkHeader = response.headers.get('Link');
       
-        if (linkHeader) {
-          const matches = linkHeader.match(/<([^>]+)>;\s*rel="next"/);
-          if (matches) {
-            pageUrl = new URL(matches[1]);
-            console.log(pageUrl.search, 'pageUrl')
-            nextPageUrl = `/${storeName}/products.json?${pageUrl}`;
-            console.log(nextPageUrl, 'nextPageUrl')
+      
+          // Xử lý linkHeader ở đây
+      
+          if (linkHeader) {
+            const matches = linkHeader.match(/<([^>]+)>;\s*rel="next"/);
+              if (matches) {
+                pageUrl = new URL(matches[1]);
+                console.log(pageUrl.search, 'pageUrl')
+                nextPageUrl = `/${storeName}/products.json?${pageUrl}`;
+                console.log(nextPageUrl, 'nextPageUrl')
+              } else {
+                  keepFetching = false; // Dừng lặp nếu không tìm thấy trang tiếp theo
+              }
           } else {
-            keepFetching = false; // Dừng lặp nếu không tìm thấy trang tiếp theo
+            keepFetching = false; // Dừng lặp nếu không có header Link
           }
-        } else {
-          keepFetching = false; // Dừng lặp nếu không có header Link
-        }
-      }
       
     }
     setAllProducts(productsFetched);
@@ -143,4 +123,4 @@ function App() {
   );
 }
 
-export default App;
+export default ShopifyPage;

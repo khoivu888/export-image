@@ -41,6 +41,46 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/dandygift/, '')
       }, 
+      '/657af8-3': {
+        target: 'https://657af8-3.myshopify.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/657af8-3/, '')
+      }, 
+      '/tee-shirt-for-family': {
+        target: 'https://tee-shirt-for-family.myshopify.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tee-shirt-for-family/, '')
+      }, 
+      '/goodlygift88': {
+        target: 'https://goodlygift88.myshopify.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/goodlygift88/, '')
+      }, 
+      '/c04f72-3': {
+        target: 'https://c04f72-3.myshopify.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/c04f72-3/, '')
+      }, 
+      '/amazingtees': {
+        target: 'https://amazingtees.onshopbase.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/amazingtees/, '')
+      }, 
+      '/pofily': {
+        target: 'https://pofily.onshopbase.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/pofily/, '')
+      }, 
+      '/pamaheart': {
+        target: 'https://pamaheart.onshopbase.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/pamaheart/, '')
+      }, 
+      '/seegovi': {
+        target: 'https://seegovi.onshopbase.com/admin',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/seegovi/, '')
+      }, 
     }
   }
 })

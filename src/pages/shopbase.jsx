@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function App() {
+const ShopbasePage = () => {
   const [storeName, setStoreName] = useState('');
   const [apiToken, setApiToken] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -133,7 +133,7 @@ function App() {
   return (
     <>
       <form onSubmit={handleSubmit} className='block-form'>
-        <input type="text" value={storeName} onChange={(e) => setStoreName(e.target.value)} placeholder="Tên store Shopify" />
+        <input type="text" value={storeName} onChange={(e) => setStoreName(e.target.value)} placeholder="Tên store Shopbase" />
         <input type="text" value={apiToken} onChange={(e) => setApiToken(e.target.value)} placeholder="API Token" />
         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -143,4 +143,4 @@ function App() {
   );
 }
 
-export default App;
+export default ShopbasePage;

@@ -13,7 +13,7 @@ function App() {
     setAllProducts([]);
     let page = 1;
     const storesUsingBasicAuth = ['amazingtees', 'seegovi', 'pamaheart', 'pofily'];
-    const usesPagePagination = storesUsingBasicAuth.includes(storeName);
+    const usesPagePagination = storesUsingBasicAuth.includes(storeName); 
 
    let formattedStartDate = startDate;
     let formattedEndDate = endDate;
